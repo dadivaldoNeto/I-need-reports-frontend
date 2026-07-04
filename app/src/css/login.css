@@ -1,0 +1,60 @@
+:root {
+	--bg_color: #FAF8FF;
+}
+
+body {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+#div_container {
+	max-width: 386;
+}
+
+
+div.welcome_msg {
+	margin-bottom: 32px;
+	display: flex;
+	justify-content: center;
+	flex-direction: column;
+	align-items: center;
+	flex-wrap: wrap;
+	gap: 32px;
+}
+
+form {
+	flex-wrap: wrap;
+	gap: 24px;
+}
+
+.custom-input {
+	padding-left: 24px;
+	border-color: #D9D9D9;
+	background-color: var(--bg_color);
+}
+
+.custom-input,
+.custom-input+input[type="submit"] {
+	width: 382px;
+	height: 50px;
+	border-radius: 6px;
+}
+
+
+.custom-input+input[type="submit"] {
+	text-transform: uppercase;
+}
+
+.links {
+	color: black;
+}
+
+.links_deactive {
+	text-decoration: none;
+	color: rgba(0, 0, 0, 0.5);
+}
+
+a:hover {
+	color: black;
+}
