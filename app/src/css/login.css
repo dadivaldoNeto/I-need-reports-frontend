@@ -46,11 +46,11 @@ form {
 	text-transform: uppercase;
 }
 
-.links {
+.link_active {
 	color: black;
 }
 
-.links_deactive {
+.link_deactive {
 	text-decoration: none;
 	color: rgba(0, 0, 0, 0.5);
 }
