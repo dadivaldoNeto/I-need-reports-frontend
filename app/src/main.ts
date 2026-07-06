@@ -1,16 +1,18 @@
 import 'bootstrap/dist/css/bootstrap.min.css'
 import 'bootstrap'
 import './css/index.css';
-import { getFormType, loginView, processForm } from './pages/login';
+import { LOGIN, REGISTER } from './api/auth';
+import { loginView, processForm } from './pages/login_and_register';
 
 const APP = document.querySelector("#app")!;
 
-const routes = {
-	'/login' : loginView(getFormType.LOGIN),
-	'/register': loginView(getFormType.REGISTER)
+const routes: Record<string, string> = {
+	'/login' : loginView(LOGIN),
+	'/register': loginView(REGISTER)
 }
 
-const onChangePath = path => {
+
+const onChangePath = (path: string) => {
 	let content = routes[path]
 	if (content == undefined)
 		content = `<h1>Hello, world </h1> <a href="/login" >Login</a>`
@@ -21,3 +23,4 @@ let pathName: string = window.location.pathname
 
 onChangePath(pathName)
 
+processForm()

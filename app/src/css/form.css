@@ -36,11 +36,17 @@ form {
 
 .custom-input,
 .custom-input+input[type="submit"] {
-	width: 382px;
-	height: 50px;
 	border-radius: 6px;
 }
 
+@media only screen and (min-width: 600px) {
+
+	.custom-input,
+	.custom-input+input[type="submit"] {
+		width: 382px;
+		height: 50px;
+	}
+}
 
 .custom-input+input[type="submit"] {
 	text-transform: uppercase;
