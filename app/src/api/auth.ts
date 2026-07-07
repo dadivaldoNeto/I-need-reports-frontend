@@ -52,13 +52,22 @@ export class AUTH {
 		let authRequest = this.createAuthRequest(data)
 		await authAPI<void>(authRequest, REGISTER_ENDPOINT)
 		console.log('Sucess')
-		alert('Success')
+	}
+
+	private static async login(data: formData): Promise<void> {
+		let authRequest = this.createAuthRequest(data)
+		let response: LoginResponse =  await authAPI<LoginResponse>(authRequest, LOGIN_ENDPOINT)
+		sessionStorage.setItem("authToken", response.token)
+		console.log(response.token)
+		console.log('Sucess Saved')
 	}
 
 	public static auth(data: formData): void {
 		try {
 			if (data.type == REGISTER)
 				this.register(data)
+			else if (data.type == LOGIN)
+				this.login(data)
 			else
 				throw new Error("INVALID TYPE OF FORM")
 		}
@@ -87,5 +96,5 @@ async function authAPI<RETURN_TYPE>(form: AuthRequest, endpoint: string): Promis
 		const message = await response.text().catch(() => '')
 		throw new Error(message)
 	}
-	return undefined as RETURN_TYPE
+	return await response.json() as RETURN_TYPE
 }
