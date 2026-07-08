@@ -16,6 +16,7 @@ export function loginView(typeForm: formType): string {
 	}
 
 	return `
+		<main class="auth">
 		<div id="div_container" >
 			<div class="welcome_msg">
 				<h1 class="h3">${title}</h1>
@@ -33,6 +34,7 @@ export function loginView(typeForm: formType): string {
 				<input class="btn btn-primary" type="submit" value="${btn}">
 			</form>
 		</div>
+		</main>
 	`
 }
 

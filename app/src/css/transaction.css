@@ -1,0 +1,24 @@
+#transaction {
+	width: 100vw;
+	height: 100vh;
+	border: 1px solid red;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+#transaction form {
+
+	flex-wrap: wrap;
+	gap: 24px;
+}
+
+@media only screen and (min-width: 600px) {
+	#transaction form {
+		width: 428px;
+	}
+	#transaction form input {
+		height: 52px;
+	}
+
+}

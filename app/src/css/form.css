@@ -1,19 +1,16 @@
-:root {
-	--bg_color: #FAF8FF;
-}
-
-body {
+.auth {
+	width: 100vw;
+	height: 100vh;
 	display: flex;
 	justify-content: center;
 	align-items: center;
 }
 
-#div_container {
-	max-width: 386;
+.auth #div_container {
+	max-width: 386px;
 }
 
-
-div.welcome_msg {
+.auth div.welcome_msg {
 	margin-bottom: 32px;
 	display: flex;
 	justify-content: center;
@@ -23,44 +20,44 @@ div.welcome_msg {
 	gap: 32px;
 }
 
-form {
+.auth form {
 	flex-wrap: wrap;
 	gap: 24px;
 }
 
-.custom-input {
+.auth .custom-input {
 	padding-left: 24px;
 	border-color: #D9D9D9;
 	background-color: var(--bg_color);
 }
 
-.custom-input,
-.custom-input+input[type="submit"] {
+.auth .custom-input,
+.auth .custom-input+input[type="submit"] {
 	border-radius: 6px;
 }
 
 @media only screen and (min-width: 600px) {
 
-	.custom-input,
-	.custom-input+input[type="submit"] {
+	.auth .custom-input,
+	.auth .custom-input+input[type="submit"] {
 		width: 382px;
 		height: 50px;
 	}
 }
 
-.custom-input+input[type="submit"] {
+.auth .custom-input+input[type="submit"] {
 	text-transform: uppercase;
 }
 
-.link_active {
+.auth .link_active {
 	color: black;
 }
 
-.link_deactive {
+.auth .link_deactive {
 	text-decoration: none;
 	color: rgba(0, 0, 0, 0.5);
 }
 
-a:hover {
+.auth a:hover {
 	color: black;
 }

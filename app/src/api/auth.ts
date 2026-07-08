@@ -58,6 +58,7 @@ export class AUTH {
 		let authRequest = this.createAuthRequest(data)
 		let response: LoginResponse =  await authAPI<LoginResponse>(authRequest, LOGIN_ENDPOINT)
 		sessionStorage.setItem("authToken", response.token)
+		sessionStorage.setItem("login", data.user)
 		console.log(response.token)
 		console.log('Sucess Saved')
 	}

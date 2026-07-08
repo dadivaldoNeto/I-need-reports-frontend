@@ -1,0 +1,9 @@
+.navbar {
+	min-height: 68px !important;
+	background-color: #FAF8FF;
+	border-bottom: 2px solid #e3f2fd;
+}
+
+.navbar .active {
+	color: #004ccd !important;
+}
