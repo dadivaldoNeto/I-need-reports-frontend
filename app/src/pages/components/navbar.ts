@@ -1,5 +1,6 @@
 import 'bootstrap-icons/font/bootstrap-icons.css';
 import '../../css/navbar.css'
+import { SESSION_USERNAME } from '../../api/requests';
 
 export type activeType = 0 | 1 | 2 | 3 ;
 
@@ -30,7 +31,7 @@ export function navBar(active: activeType): string {
 			</div>
 			<div>
 			<span class="navbar-text">
-     			Olá, ${sessionStorage.getItem("user")}
+     			Olá, ${sessionStorage.getItem(SESSION_USERNAME)}
 				<a href="/"> <i class="bi bi-gear"></i> </a>
     		</span>
 		</div>

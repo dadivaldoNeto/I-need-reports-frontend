@@ -1,4 +1,4 @@
-import { API_URL, LOGIN_ENDPOINT, REGISTER_ENDPOINT } from "./requests"
+import { SESSION_ACCESS_TOKEN, API_URL, isUndefined, LOGIN_ENDPOINT, REGISTER_ENDPOINT, SESSION_USERNAME } from "./requests"
 
 
 export type AuthRequest = {
@@ -22,23 +22,11 @@ export type formType = 1 | 2;
 export const LOGIN: formType = 1
 export const REGISTER: formType = 2
 
-/*
-	Manipulate formData
-
-*/
 export class AUTH {
 
 	// Check an undefined item
-	private static isUndefined(data: formData): boolean {
-		for (const item of Object.values(data)) {
-			if (item == undefined)
-				return (true)
-		}
-		return (false);
-	}
-
 	private static createAuthRequest(data: formData): AuthRequest {
-		if (this.isUndefined(data))
+		if (isUndefined(data))
 			throw new Error("Payload: FORM DATA, has Undefined data")
 
 		let authRequest: AuthRequest = {
@@ -50,17 +38,21 @@ export class AUTH {
 
 	private static async register(data: formData): Promise<void> {
 		let authRequest = this.createAuthRequest(data)
-		await authAPI<void>(authRequest, REGISTER_ENDPOINT)
+		let response: LoginResponse = await this.authAPI(authRequest, REGISTER_ENDPOINT)
+		sessionStorage.setItem(SESSION_ACCESS_TOKEN, response.token)
+		sessionStorage.setItem(SESSION_USERNAME, data.user)
 		console.log('Sucess')
+		window.location.href = '/'
 	}
 
 	private static async login(data: formData): Promise<void> {
 		let authRequest = this.createAuthRequest(data)
-		let response: LoginResponse =  await authAPI<LoginResponse>(authRequest, LOGIN_ENDPOINT)
-		sessionStorage.setItem("authToken", response.token)
-		sessionStorage.setItem("login", data.user)
+		let response: LoginResponse = await this.authAPI(authRequest, LOGIN_ENDPOINT)
+		sessionStorage.setItem(SESSION_ACCESS_TOKEN, response.token)
+		sessionStorage.setItem(SESSION_USERNAME, data.user)
 		console.log(response.token)
 		console.log('Sucess Saved')
+		window.location.href = '/'
 	}
 
 	public static auth(data: formData): void {
@@ -80,22 +72,21 @@ export class AUTH {
 			}
 		}
 	}
-}
 
-async function authAPI<RETURN_TYPE>(form: AuthRequest, endpoint: string): Promise<RETURN_TYPE> {
+	private static async authAPI(form: AuthRequest, endpoint: string): Promise<LoginResponse> {
+		const response = await fetch(endpoint, {
+			headers: {
+				"Content-Type": "application/json",
+				"Accept": "application/json"
+			},
+			method: 'POST',
+			body: JSON.stringify(form)
+		})
 
-	const response = await fetch(endpoint, {
-		headers: {
-			"Content-Type": "application/json",
-			"Accept": "application/json"
-		},
-		method: 'POST',
-		body: JSON.stringify(form)
-	})
-
-	if (!response.ok) {
-		const message = await response.text().catch(() => '')
-		throw new Error(message)
+		if (!response.ok) {
+			const message = await response.text().catch(() => '')
+			throw new Error(message)
+		}
+		return await response.json() as LoginResponse
 	}
-	return await response.json() as RETURN_TYPE
 }
