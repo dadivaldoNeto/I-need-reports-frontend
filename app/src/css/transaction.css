@@ -1,21 +1,98 @@
 #transaction {
-	flex-grow: 1;
-	display: flex;
-	justify-content: center;
-	align-items: center;
+  flex-grow: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 24px 16px;
 }
+
+#form_transaction {
+  width: 100%;
+}
+
 #money_and_date {
-	display: flex;
-	flex-direction: row;
-	flex-wrap: nowrap;
-	gap: 20px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  align-items: end;
+}
+
+#amount,
+#date {
+  min-width: 0;
+}
+
+#dateInput {
+  height: 52px;
+}
+
+.money-control {
+  width: 100%;
+  height: 52px;
+  display: flex;
+  align-items: center;
+  border: 1px solid #dee2e6;
+  border-radius: 0.5rem;
+  background-color: #fff;
+  overflow: hidden;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.money-control:focus-within {
+  border-color: #86b7fe;
+  box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+}
+
+.money-prefix {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  padding: 0 14px;
+  background-color: #f8f9fa;
+  border-right: 1px solid #dee2e6;
+  color: #495057;
+  font-weight: 600;
+  user-select: none;
+}
+
+.money-input {
+  width: 100%;
+  height: 100%;
+  border: none;
+  outline: none;
+  padding: 0 14px;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #212529;
+  background-color: transparent;
+}
+
+.money-input::placeholder {
+  color: #adb5bd;
+}
+
+@media only screen and (max-width: 430px) {
+  #money_and_date {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
 }
 
 @media only screen and (min-width: 600px) {
-	#transaction form {
-		width: 428px;
-	}
-	#transaction form input {
-		height: 52px;
+  #transaction form input:not([type="hidden"]):not([type="submit"]) {
+    height: 52px;
+  }
+
+  #form_transaction {
+	width: 428px;
+  }
+  #transaction form input[type="submit"] {
+    height: 48px;
+  }
+}
+
+@media only screen and (min-width: 1200px) {
+	#form_transaction {
+		min-width: 540px;
 	}
 }

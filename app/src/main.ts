@@ -4,7 +4,7 @@ import './css/index.css';
 import { LOGIN, REGISTER } from './api/auth';
 import { loginView, processForm } from './pages/authPage';
 import { EXPENSE, INCOME } from './pages/components/navbar';
-import { transaction } from './pages/transaction';
+import { processTransaction, transaction } from './pages/transaction';
 import { SESSION_ACCESS_TOKEN, SESSION_USERNAME } from './api/requests';
 import { dashboard } from './pages/dashboardPage';
 
@@ -75,4 +75,5 @@ window.addEventListener("popstate", () => {
 
 onChangePath(window.location.pathname)
 
+processTransaction()
 processForm()

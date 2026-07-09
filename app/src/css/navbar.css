@@ -7,3 +7,9 @@
 .navbar .active {
 	color: #004ccd !important;
 }
+
+.bi, .bi-gear {
+	font-size: 1.2em;
+	color: #004ccd;
+	margin-left: 6px;
+}

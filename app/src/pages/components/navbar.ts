@@ -32,8 +32,9 @@ export function navBar(active: activeType): string {
 			<div>
 			<span class="navbar-text">
      			Olá, ${sessionStorage.getItem(SESSION_USERNAME)}
-				<a href="/"> <i class="bi bi-gear"></i> </a>
-    		</span>
+				<a href="/"> <i class="bi bi-gear"></i></a>
+				<a href="/logout"><i class="bi bi-box-arrow-right"></i><a>
+			</span>
 		</div>
 	</nav>
 	`

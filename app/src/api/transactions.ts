@@ -1,4 +1,4 @@
-import { SESSION_ACCESS_TOKEN, TRANSACTION_ENDPOINT } from "./requests"
+import { isUndefined, SESSION_ACCESS_TOKEN, TRANSACTION_ENDPOINT } from "./requests"
 
 export type Operation = 'EXPENSE' | 'INCOME' | undefined
 
@@ -12,7 +12,23 @@ export type TransactionRequest = {
 
 export class TRANSACTION {
 
-	private async addTransaction(payload: TransactionRequest): Promise<void> {
+	public static insertTransaction(payload: TransactionRequest) {
+		try {
+
+			if (isUndefined(payload))
+				throw new Error("INVALID TYPE OF FORM")
+			this.addTransaction(payload)
+		}
+		catch (error: unknown) {
+			if (error instanceof Error) {
+				console.error(error.message);
+			} else {
+				console.error("An unexpected error occurred:", String(error));
+			}
+		}
+	}
+
+	private static async addTransaction(payload: TransactionRequest): Promise<void> {
 		const response = await fetch(TRANSACTION_ENDPOINT, {
 			headers: {
 				Authorization: `Bearer ${sessionStorage.getItem(SESSION_ACCESS_TOKEN)}`,
