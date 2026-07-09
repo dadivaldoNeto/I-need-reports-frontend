@@ -1,17 +1,23 @@
 #transaction {
-	width: 100vw;
-	height: 100vh;
-	border: 1px solid red;
+	flex-grow: 1;
 	display: flex;
 	justify-content: center;
 	align-items: center;
 }
-
-#transaction form {
-
-	flex-wrap: wrap;
-	gap: 24px;
+#money_and_date {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: nowrap;
+	gap: 20px;
 }
+
+#money_and_date input[type=text] {
+
+}
+
+#money_and_date input[type=number] {
+}
+
 
 @media only screen and (min-width: 600px) {
 	#transaction form {
@@ -20,5 +26,4 @@
 	#transaction form input {
 		height: 52px;
 	}
-
 }

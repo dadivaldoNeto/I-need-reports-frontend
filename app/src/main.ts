@@ -11,7 +11,8 @@ const APP = document.querySelector("#app")!;
 const routes: Record<string, string> = {
 	'/login' : loginView(LOGIN),
 	'/register': loginView(REGISTER),
-	'/income' : transaction(INCOME)
+	'/income' : transaction(INCOME),
+	'/expense' : transaction(EXPENSE)
 }
 
 const onChangePath = (path: string) => {
