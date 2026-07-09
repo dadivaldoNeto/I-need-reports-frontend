@@ -33,7 +33,7 @@ const routes: Record<string, string> = {
 	'/login' : loginView(LOGIN),
 	'/register': loginView(REGISTER),
 	'/income' : transaction(INCOME),
-	'/expense' : transaction(EXPENSE)
+	'/expense' : transaction(EXPENSE),
 }
 
 function isLoggedIn() : boolean {
@@ -53,6 +53,11 @@ const onChangePath = (path: string) => {
 		if (path == '/login' || path == '/register') {
 			window.location.href = '/'
 			return ;	
+		}
+		else if (path == '/logout') {
+			sessionStorage.clear()
+			window.location.href= '/'
+			return ;
 		}
 		else
 			content = routes[path]

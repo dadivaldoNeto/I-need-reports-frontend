@@ -12,12 +12,12 @@ export type TransactionRequest = {
 
 export class TRANSACTION {
 
-	public static insertTransaction(payload: TransactionRequest) {
+	public static async insertTransaction(payload: TransactionRequest) {
 		try {
 
 			if (isUndefined(payload))
 				throw new Error("INVALID TYPE OF FORM")
-			this.addTransaction(payload)
+			await this.addTransaction(payload)
 		}
 		catch (error: unknown) {
 			if (error instanceof Error) {

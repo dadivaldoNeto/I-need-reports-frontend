@@ -11,7 +11,7 @@ export type LoginResponse = {
 }
 
 export type formData = {
-	user: string | undefined,
+	user: string,
 	password: string | undefined,
 	type: number | undefined
 }
@@ -55,12 +55,12 @@ export class AUTH {
 		window.location.href = '/'
 	}
 
-	public static auth(data: formData): void {
+	public static async auth(data: formData) {
 		try {
 			if (data.type == REGISTER)
-				this.register(data)
+				await this.register(data)
 			else if (data.type == LOGIN)
-				this.login(data)
+				await this.login(data)
 			else
 				throw new Error("INVALID TYPE OF FORM")
 		}
