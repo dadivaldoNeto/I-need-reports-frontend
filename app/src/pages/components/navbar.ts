@@ -15,27 +15,56 @@ export function navBar(active: activeType): string {
 	navItems[active] = "active"
 
 	return `
-	<nav class="navbar navbar-expand-lg">
-		<div class="container-md">
-			<a class="navbar-brand" style="color: #004ccd;" href="/" >
-				<img src="/src/assets/logo.svg" alt="Bootstrap" width="60" height="30">
-				DNR
-			</a>
-			<div class="collapse navbar-collapse ms-4">
-	 			<div class="navbar-nav">
-     			   <a class="nav-link ${navItems[DASHBOARD]}" aria-current="page" href="/">Dashboard</a>
-     			   <a class="nav-link ${navItems[INCOME]}" href="/income">Income</a>
-     			   <a class="nav-link ${navItems[EXPENSE]}" href="/expense">Expense</a>
-     			   <a class="nav-link ${navItems[HISTORY]}" href="/">History</a>
-     			</div>
-			</div>
-			<div>
-			<span class="navbar-text">
-     			Olá, ${sessionStorage.getItem(SESSION_USERNAME)}
-				<a href="/"> <i class="bi bi-gear"></i></a>
-				<a href="/logout"><i class="bi bi-box-arrow-right"></i><a>
-			</span>
-		</div>
-	</nav>
+	<nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm">
+    <div class="container">
+
+        <!-- Logo -->
+        <a class="navbar-brand fw-bold text-primary" href="/">
+            <img src="/src/assets/logo.svg" alt="Logo" width="60" height="30">
+            DNR
+        </a>
+
+        <!-- Botão Mobile -->
+        <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarMenu"
+            aria-controls="navbarMenu"
+            aria-expanded="false"
+            aria-label="Toggle navigation">
+
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <!-- Conteúdo -->
+        <div class="collapse navbar-collapse" id="navbarMenu">
+
+            <!-- Menu -->
+            <div class="navbar-nav me-auto ms-lg-4">
+                <a class="nav-link ${navItems[DASHBOARD]}" href="/">Dashboard</a>
+                <a class="nav-link ${navItems[INCOME]}" href="/income">Income</a>
+                <a class="nav-link ${navItems[EXPENSE]}" href="/expense">Expense</a>
+                <a class="nav-link ${navItems[HISTORY]}" href="/">History</a>
+            </div>
+
+            <!-- Usuário -->
+            <div class="d-flex align-items-center gap-3 mt-3 mt-lg-0">
+                <span class="navbar-text">
+                    Olá, ${sessionStorage.getItem(SESSION_USERNAME)}
+                </span>
+
+                <a href="/" class="text-dark">
+                    <i class="bi bi-gear fs-5"></i>
+                </a>
+
+                <a href="/logout" class="text-danger">
+                    <i class="bi bi-box-arrow-right fs-5"></i>
+                </a>
+            </div>
+
+        </div>
+    </div>
+</nav>
 	`
 }

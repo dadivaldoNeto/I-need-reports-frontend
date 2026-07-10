@@ -2,7 +2,7 @@ import { EXPENSE, INCOME, navBar } from "./components/navbar";
 import '../css/transaction.css'
 import type { activeType } from "./components/navbar";
 import { TRANSACTION, type TransactionRequest } from "../api/transactions";
-import { modal } from "./components/modal";
+import { callModal, Createmodal } from "./components/modal";
 
 export function transaction(type: activeType): string {
 
@@ -83,15 +83,12 @@ export function transaction(type: activeType): string {
     <input class="btn btn-primary" type="submit" value="Salvar" />
   </form>
 </div>
-	${modal('Transaction Added', name)}
+	${Createmodal('Transaction Added', name)}
 	`
 }
 
 export function processTransaction() {
-
-
 	const transaction = document.querySelector("#form_transaction")
-
 	addInputFormat()
 	if (transaction == null)
 		return;
@@ -101,7 +98,6 @@ export function processTransaction() {
 		const tmp = Number(document.querySelector<HTMLInputElement>("#type_of_input")?.value)
 		const desc = document.querySelector<HTMLTextAreaElement>("#desc")?.value
 
-
 		const transactioRequest: TransactionRequest = {
 			type: tmp == INCOME ? 'INCOME' : tmp == EXPENSE ? 'EXPENSE' : undefined,
 			title: document.querySelector<HTMLInputElement>("#title")?.value,
@@ -109,9 +105,8 @@ export function processTransaction() {
 			description: desc == undefined ? null: desc,
 			date: document.querySelector<HTMLInputElement>("#dateInput")?.value
 		}
-		TRANSACTION.insertTransaction(transactioRequest)
+		TRANSACTION.insertTransaction(transactioRequest, transaction)
 		console.log(transactioRequest)
-		// Aqui posso chamar o success ou o error, em success its OK!
 	})
 }
 

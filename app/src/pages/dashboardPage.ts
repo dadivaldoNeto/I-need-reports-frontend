@@ -87,7 +87,6 @@ export function dashboard(data: dashboardResponse): string {
 
     <!-- Card section-->
 
-	
   </div>
 </main>
 `

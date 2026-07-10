@@ -13,14 +13,13 @@ export type TransactionRequest = {
 
 export class TRANSACTION {
 
-	public static async insertTransaction(payload: TransactionRequest) {
+	public static async insertTransaction(payload: TransactionRequest, t: any) {
 		try {
-
 			if (isUndefined(payload))
 				throw new Error("INVALID TYPE OF FORM")
 			await this.addTransaction(payload)
 			callModal()
-			window.location.href = window.location.pathname
+			t.reset()
 		}
 		catch (error: unknown) {
 			if (error instanceof Error) {
@@ -29,7 +28,8 @@ export class TRANSACTION {
 				console.error("An unexpected error occurred:", String(error));
 			}
 			// trash code
-			document.querySelector("#exampleModalLabel")!.innerHTML = String(error)
+			document.querySelector("#ModalLabel")!.innerHTML = "Error"
+			document.querySelector(".modal-body")!.innerHTML = String(error)
 			callModal()
 		}
 	}
