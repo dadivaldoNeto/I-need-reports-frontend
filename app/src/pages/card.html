@@ -1,0 +1,124 @@
+<section class="dashboard__table-card">
+      <div class="dashboard__table-toolbar">
+        <div>
+          <h2 class="dashboard__table-title">Movimentos recentes</h2>
+          <p class="dashboard__table-subtitle">
+            Consulte e administre os últimos registos financeiros.
+          </p>
+        </div>
+
+        <button class="btn btn-primary dashboard__export-button" type="button" onclick="window.print()">
+          <i class="bi bi-file-earmark-pdf"></i>
+          Exportar PDF
+        </button>
+      </div>
+
+      <div class="table-responsive dashboard__table-wrapper">
+        <table class="table align-middle dashboard__table">
+          <thead>
+            <tr>
+              <th>Descrição</th>
+              <th>Categoria</th>
+              <th>Tipo</th>
+              <th>Valor</th>
+              <th>Data</th>
+              <th class="text-end">Opções</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            <tr>
+              <td>
+                <div class="dashboard__description">Salário</div>
+                <small class="dashboard__reference">MOV-0001</small>
+              </td>
+              <td>Rendimentos</td>
+              <td>
+                <span class="dashboard__type dashboard__type--income">Entrada</span>
+              </td>
+              <td class="dashboard__amount">2.450,00 Kz</td>
+              <td>01/07/2026</td>
+              <td>
+                <div class="dashboard__actions">
+                  <button class="btn dashboard__action dashboard__action--edit" type="button" aria-label="Editar salário">
+                    <i class="bi bi-pencil-square"></i>
+                  </button>
+                  <button class="btn dashboard__action dashboard__action--delete" type="button" aria-label="Eliminar salário">
+                    <i class="bi bi-trash3"></i>
+                  </button>
+                </div>
+              </td>
+            </tr>
+
+            <tr>
+              <td>
+                <div class="dashboard__description">Renda da casa</div>
+                <small class="dashboard__reference">MOV-0002</small>
+              </td>
+              <td>Habitação</td>
+              <td>
+                <span class="dashboard__type dashboard__type--expense">Despesa</span>
+              </td>
+              <td class="dashboard__amount">780,00 Kz</td>
+              <td>03/07/2026</td>
+              <td>
+                <div class="dashboard__actions">
+                  <button class="btn dashboard__action dashboard__action--edit" type="button" aria-label="Editar renda da casa">
+                    <i class="bi bi-pencil-square"></i>
+                  </button>
+                  <button class="btn dashboard__action dashboard__action--delete" type="button" aria-label="Eliminar renda da casa">
+                    <i class="bi bi-trash3"></i>
+                  </button>
+                </div>
+              </td>
+            </tr>
+
+            <tr>
+              <td>
+                <div class="dashboard__description">Projeto freelance</div>
+                <small class="dashboard__reference">MOV-0003</small>
+              </td>
+              <td>Serviços</td>
+              <td>
+                <span class="dashboard__type dashboard__type--income">Entrada</span>
+              </td>
+              <td class="dashboard__amount">650,00 Kz</td>
+              <td>05/07/2026</td>
+              <td>
+                <div class="dashboard__actions">
+                  <button class="btn dashboard__action dashboard__action--edit" type="button" aria-label="Editar projeto freelance">
+                    <i class="bi bi-pencil-square"></i>
+                  </button>
+                  <button class="btn dashboard__action dashboard__action--delete" type="button" aria-label="Eliminar projeto freelance">
+                    <i class="bi bi-trash3"></i>
+                  </button>
+                </div>
+              </td>
+            </tr>
+
+            <tr>
+              <td>
+                <div class="dashboard__description">Supermercado</div>
+                <small class="dashboard__reference">MOV-0004</small>
+              </td>
+              <td>Alimentação</td>
+              <td>
+                <span class="dashboard__type dashboard__type--expense">Despesa</span>
+              </td>
+              <td class="dashboard__amount">124,70 Kz</td>
+              <td>08/07/2026</td>
+              <td>
+                <div class="dashboard__actions">
+                  <button class="btn dashboard__action dashboard__action--edit" type="button" aria-label="Editar supermercado">
+                    <i class="bi bi-pencil-square"></i>
+                  </button>
+                  <button class="btn dashboard__action dashboard__action--delete" type="button" aria-label="Eliminar supermercado">
+                    <i class="bi bi-trash3"></i>
+                  </button>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>

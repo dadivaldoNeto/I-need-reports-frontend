@@ -1,13 +1,14 @@
+import { callModal } from "../pages/components/modal"
 import { isUndefined, SESSION_ACCESS_TOKEN, TRANSACTION_ENDPOINT } from "./requests"
 
 export type Operation = 'EXPENSE' | 'INCOME' | undefined
 
 export type TransactionRequest = {
-  type: Operation | undefined
-  title: string | undefined
-  amount: number | undefined
-  description: string | undefined
-  date: string | undefined
+	type: Operation | undefined
+	title: string | undefined
+	amount: number | undefined
+	description: string | null
+	date: string | undefined
 }
 
 export class TRANSACTION {
@@ -18,6 +19,8 @@ export class TRANSACTION {
 			if (isUndefined(payload))
 				throw new Error("INVALID TYPE OF FORM")
 			await this.addTransaction(payload)
+			callModal()
+			window.location.href = window.location.pathname
 		}
 		catch (error: unknown) {
 			if (error instanceof Error) {
@@ -25,6 +28,9 @@ export class TRANSACTION {
 			} else {
 				console.error("An unexpected error occurred:", String(error));
 			}
+			// trash code
+			document.querySelector("#exampleModalLabel")!.innerHTML = String(error)
+			callModal()
 		}
 	}
 

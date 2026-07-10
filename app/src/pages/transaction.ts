@@ -2,16 +2,20 @@ import { EXPENSE, INCOME, navBar } from "./components/navbar";
 import '../css/transaction.css'
 import type { activeType } from "./components/navbar";
 import { TRANSACTION, type TransactionRequest } from "../api/transactions";
+import { modal } from "./components/modal";
 
 export function transaction(type: activeType): string {
 
+	let name;
 	let placeholder;
 	let textAreaPlaceholder;
 	if (type == INCOME) {
+		name ="INCOME"
 		placeholder = "Google Salary..."
 		textAreaPlaceholder = "Lorem ipsum with some data"
 	}
 	else if (type == EXPENSE) {
+		name ="EXPENSE"
 		placeholder = "Mom's money..."
 		textAreaPlaceholder = "Mom's Gave-me 2k"
 	}
@@ -79,6 +83,7 @@ export function transaction(type: activeType): string {
     <input class="btn btn-primary" type="submit" value="Salvar" />
   </form>
 </div>
+	${modal('Transaction Added', name)}
 	`
 }
 
@@ -94,12 +99,14 @@ export function processTransaction() {
 		event.preventDefault()
 
 		const tmp = Number(document.querySelector<HTMLInputElement>("#type_of_input")?.value)
+		const desc = document.querySelector<HTMLTextAreaElement>("#desc")?.value
+
 
 		const transactioRequest: TransactionRequest = {
 			type: tmp == INCOME ? 'INCOME' : tmp == EXPENSE ? 'EXPENSE' : undefined,
 			title: document.querySelector<HTMLInputElement>("#title")?.value,
-			amount: Number(document.querySelector<HTMLInputElement>("#money")?.value),
-			description: document.querySelector<HTMLTextAreaElement>("#text_area")?.value,
+			amount: Number(document.querySelector<HTMLInputElement>("#moneyValue")?.value),
+			description: desc == undefined ? null: desc,
 			date: document.querySelector<HTMLInputElement>("#dateInput")?.value
 		}
 		TRANSACTION.insertTransaction(transactioRequest)
