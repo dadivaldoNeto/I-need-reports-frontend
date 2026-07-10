@@ -7,6 +7,7 @@ import { EXPENSE, INCOME } from './pages/components/navbar';
 import { processTransaction, transaction } from './pages/transaction';
 import { SESSION_ACCESS_TOKEN, SESSION_USERNAME } from './api/requests';
 import { dashboard } from './pages/dashboardPage';
+import { ProcessDashboard } from './api/dashboard';
 
 const APP = document.querySelector("#app")!;
 
@@ -28,12 +29,12 @@ function error(msg: string): string {
 `
 }
 
-const routes: Record<string, string> = {
-	'/' : dashboard(),
-	'/login' : loginView(LOGIN),
-	'/register': loginView(REGISTER),
-	'/income' : transaction(INCOME),
-	'/expense' : transaction(EXPENSE),
+const routes: Record<string, () => string | void> = {
+	'/' : () => ProcessDashboard(),
+	'/login' : () => loginView(LOGIN),
+	'/register': () => loginView(REGISTER),
+	'/income' : () => transaction(INCOME),
+	'/expense' : () => transaction(EXPENSE),
 }
 
 function isLoggedIn() : boolean {
@@ -60,10 +61,10 @@ const onChangePath = (path: string) => {
 			return ;
 		}
 		else
-			content = routes[path]
+			content = routes[path]()
 	}
 	else if (path == '/login' || path == '/register') {
-		content = routes[path]
+		content = routes[path]()
 	}
 	else {
 		window.location.href = '/login'

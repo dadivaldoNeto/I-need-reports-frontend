@@ -1,5 +1,19 @@
 @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap');
 
+
+:root {
+  --bg: #0e0f11;
+  --panel: #151618;
+  --panel-soft: #18191c;
+  --border: #2a2c30;
+  --border-soft: #232529;
+  --text: #f1f2f3;
+  --muted: #9599a2;
+  --green: #45b78b;
+  --green-soft: rgba(69, 183, 139, .14);
+  --blue: #3478f6;
+}
+
 * {
   margin: 0px;
   padding: 0px;

@@ -12,7 +12,7 @@
 
 #money_and_date {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 2.5fr 1fr;
   gap: 20px;
   align-items: end;
 }

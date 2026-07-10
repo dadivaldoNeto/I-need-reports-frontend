@@ -1,4 +1,4 @@
-import { SESSION_ACCESS_TOKEN, API_URL, isUndefined, LOGIN_ENDPOINT, REGISTER_ENDPOINT, SESSION_USERNAME } from "./requests"
+import { SESSION_ACCESS_TOKEN, isUndefined, LOGIN_ENDPOINT, REGISTER_ENDPOINT, SESSION_USERNAME } from "./requests"
 
 
 export type AuthRequest = {

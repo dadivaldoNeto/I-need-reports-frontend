@@ -115,27 +115,124 @@ function addInputFormat(): void {
 
 	const formatter = new Intl.NumberFormat("pt-AO", {
 		minimumFractionDigits: 0,
-		maximumFractionDigits: 0,
+		maximumFractionDigits: 2,
 	});
 
-	function getOnlyNumbers(value: string): string {
-		return value.replace(/\D/g, "");
-	}
+	function parseMoney(value: string): {
+		integerPart: string;
+		decimalPart: string;
+		hasDecimalSeparator: boolean;
+	} {
+		const sanitizedValue = value.replace(/[^\d,.]/g, "");
+		const separatorIndex = sanitizedValue.search(/[,.]/);
 
-	function formatMoney(value: string): string {
-		const cleanValue = getOnlyNumbers(value);
-
-		if (!cleanValue) {
-			return "";
+		if (separatorIndex === -1) {
+			return {
+				integerPart: sanitizedValue.replace(/\D/g, ""),
+				decimalPart: "",
+				hasDecimalSeparator: false,
+			};
 		}
 
-		return formatter.format(Number(cleanValue));
+		return {
+			integerPart: sanitizedValue
+				.slice(0, separatorIndex)
+				.replace(/\D/g, ""),
+			decimalPart: sanitizedValue
+				.slice(separatorIndex + 1)
+				.replace(/\D/g, "")
+				.slice(0, 2),
+			hasDecimalSeparator: true,
+		};
+	}
+
+	function formatMoney(value: string): {
+		formattedValue: string;
+		rawValue: string;
+	} {
+		const {
+			integerPart,
+			decimalPart,
+			hasDecimalSeparator,
+		} = parseMoney(value);
+
+		if (!integerPart && !hasDecimalSeparator) {
+			return {
+				formattedValue: "",
+				rawValue: "",
+			};
+		}
+
+		const integerNumber = Number(integerPart || "0");
+		const formattedInteger = formatter.format(integerNumber);
+
+		const formattedValue = hasDecimalSeparator
+			? `${formattedInteger},${decimalPart}`
+			: formattedInteger;
+
+		const rawValue = decimalPart
+			? `${integerNumber}.${decimalPart}`
+			: String(integerNumber);
+
+		return {
+			formattedValue,
+			rawValue,
+		};
+	}
+
+	function countDigits(value: string): number {
+		return value.replace(/\D/g, "").length;
+	}
+
+	function findCursorPosition(
+		value: string,
+		digitsBeforeCursor: number,
+	): number {
+		if (digitsBeforeCursor === 0) {
+			return 0;
+		}
+
+		let digitsFound = 0;
+
+		for (let index = 0; index < value.length; index++) {
+			if (/\d/.test(value[index])) {
+				digitsFound++;
+			}
+
+			if (digitsFound === digitsBeforeCursor) {
+				return index + 1;
+			}
+		}
+
+		return value.length;
 	}
 
 	moneyInput?.addEventListener("input", () => {
-		const rawValue = getOnlyNumbers(moneyInput.value);
+		const cursorPosition = moneyInput.selectionStart ?? moneyInput.value.length;
 
-		moneyInput.value = formatMoney(rawValue);
+		const valueBeforeCursor = moneyInput.value.slice(
+			0,
+			cursorPosition,
+		);
+
+		const digitsBeforeCursor = countDigits(valueBeforeCursor);
+
+		const {
+			formattedValue,
+			rawValue,
+		} = formatMoney(moneyInput.value);
+
+		moneyInput.value = formattedValue;
+
+		const newCursorPosition = findCursorPosition(
+			formattedValue,
+			digitsBeforeCursor,
+		);
+
+		moneyInput.setSelectionRange(
+			newCursorPosition,
+			newCursorPosition,
+		);
 
 		if (moneyValue) {
 			moneyValue.value = rawValue;
