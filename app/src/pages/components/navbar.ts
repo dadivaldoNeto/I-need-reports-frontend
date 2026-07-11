@@ -15,56 +15,92 @@ export function navBar(active: activeType): string {
 	navItems[active] = "active"
 
 	return `
-	<nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm">
-    <div class="container">
+<nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm app-navbar">
+	<div class="container-fluid app-navbar__container">
 
-        <!-- Logo -->
-        <a class="navbar-brand fw-bold text-primary" href="/">
-            <img src="/src/assets/logo.svg" alt="Logo" width="60" height="30">
-            DNR
-        </a>
+		<a
+			class="navbar-brand app-navbar__brand"
+			href="/"
+		>
+			<img
+				src="/src/assets/logo.svg"
+				alt="DNR"
+				class="app-navbar__logo"
+			>
 
-        <!-- Botão Mobile -->
-        <button
-            class="navbar-toggler"
-            type="button"
-            data-bs-toggle="collapse"
-            data-bs-target="#navbarMenu"
-            aria-controls="navbarMenu"
-            aria-expanded="false"
-            aria-label="Toggle navigation">
+			<span>DNR</span>
+		</a>
 
-            <span class="navbar-toggler-icon"></span>
-        </button>
+		<button
+			class="navbar-toggler app-navbar__toggler"
+			type="button"
+			data-bs-toggle="collapse"
+			data-bs-target="#navbarMenu"
+			aria-controls="navbarMenu"
+			aria-expanded="false"
+			aria-label="Abrir menu"
+		>
+			<span class="navbar-toggler-icon"></span>
+		</button>
 
-        <!-- Conteúdo -->
-        <div class="collapse navbar-collapse" id="navbarMenu">
+		<div
+			class="collapse navbar-collapse app-navbar__collapse"
+			id="navbarMenu"
+		>
+			<div class="navbar-nav app-navbar__links">
+				<a
+					class="nav-link ${navItems[DASHBOARD]}"
+					href="/"
+				>
+					Dashboard
+				</a>
 
-            <!-- Menu -->
-            <div class="navbar-nav me-auto ms-lg-4">
-                <a class="nav-link ${navItems[DASHBOARD]}" href="/">Dashboard</a>
-                <a class="nav-link ${navItems[INCOME]}" href="/income">Income</a>
-                <a class="nav-link ${navItems[EXPENSE]}" href="/expense">Expense</a>
-                <a class="nav-link ${navItems[HISTORY]}" href="/">History</a>
-            </div>
+				<a
+					class="nav-link ${navItems[INCOME]}"
+					href="/income"
+				>
+					Income
+				</a>
 
-            <!-- Usuário -->
-            <div class="d-flex align-items-center gap-3 mt-3 mt-lg-0">
-                <span class="navbar-text">
-                    Olá, ${sessionStorage.getItem(SESSION_USERNAME)}
-                </span>
+				<a
+					class="nav-link ${navItems[EXPENSE]}"
+					href="/expense"
+				>
+					Expense
+				</a>
 
-                <a href="/" class="text-dark">
-                    <i class="bi bi-gear fs-5"></i>
-                </a>
+				<a
+					class="nav-link ${navItems[HISTORY]}"
+					href="/history"
+				>
+					History
+				</a>
+			</div>
 
-                <a href="/logout" class="text-danger">
-                    <i class="bi bi-box-arrow-right fs-5"></i>
-                </a>
-            </div>
+			<div class="app-navbar__user">
+				<span class="navbar-text app-navbar__username">
+					Olá, ${sessionStorage.getItem(SESSION_USERNAME) ?? "Utilizador"}
+				</span>
 
-        </div>
-    </div>
+				<a
+					href="/settings"
+					class="app-navbar__icon-link"
+					aria-label="Definições"
+				>
+					<i class="bi bi-gear"></i>
+				</a>
+
+				<a
+					href="/logout"
+					class="app-navbar__icon-link app-navbar__icon-link--logout"
+					aria-label="Terminar sessão"
+				>
+					<i class="bi bi-box-arrow-right"></i>
+				</a>
+			</div>
+		</div>
+
+	</div>
 </nav>
 	`
 }

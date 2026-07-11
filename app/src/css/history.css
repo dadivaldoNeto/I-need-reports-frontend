@@ -1,0 +1,215 @@
+.history {
+  --dashboard-primary: var(--bs-primary, #0d6efd);
+  --dashboard-primary-dark: #0a58ca;
+  --dashboard-primary-soft: #eef5ff;
+  --dashboard-white: #ffffff;
+  --dashboard-bg: #f6f9ff;
+  --dashboard-text: #172033;
+  --dashboard-muted: #6c757d;
+  --dashboard-border: #dce6f5;
+  --dashboard-danger: #dc3545;
+  --dashboard-danger-soft: #fff0f1;
+
+  width: 100%;
+  padding: 24px;
+  color: var(--dashboard-text);
+  background: var(--dashboard-bg);
+}
+
+.history .history__table-card {
+  overflow: hidden;
+  border: 1px solid var(--dashboard-border);
+  border-radius: 16px;
+  background: var(--dashboard-white);
+  box-shadow: 0 14px 34px rgba(13, 110, 253, 0.08);
+}
+
+.history .history__table-header {
+  padding: 22px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+  border-bottom: 1px solid var(--dashboard-border);
+}
+
+.history .history__table-title {
+  margin: 0;
+  color: var(--dashboard-text);
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.history .history__table-subtitle {
+  margin: 5px 0 0;
+  color: var(--dashboard-muted);
+  font-size: 13px;
+}
+
+.history .history__export-button {
+  min-height: 40px;
+  padding-inline: 15px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  white-space: nowrap;
+}
+
+.history .history__table {
+  min-width: 840px;
+  margin: 0;
+  --bs-table-bg: transparent;
+  --bs-table-color: var(--dashboard-text);
+  --bs-table-border-color: #e7edf6;
+}
+
+.history .history__table thead th {
+  padding: 13px 18px;
+  color: #5f6f84;
+  background: #f8fbff;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.035em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.history .history__table tbody td {
+  padding: 16px 18px;
+  font-size: 13px;
+  white-space: nowrap;
+}
+
+.history .history__table tbody tr {
+  transition: background 160ms ease;
+}
+
+.history .history__table tbody tr:hover {
+  background: #f8fbff;
+}
+
+.history .history__item {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+}
+
+.history .history__item-icon {
+  width: 36px;
+  height: 36px;
+  flex: 0 0 36px;
+  display: inline-grid;
+  place-items: center;
+  color: var(--dashboard-primary);
+  border-radius: 10px;
+  background: var(--dashboard-primary-soft);
+  font-size: 16px;
+}
+
+.history .history__item strong,
+.history .history__item small {
+  display: block;
+}
+
+.history .history__item strong {
+  color: var(--dashboard-text);
+  font-weight: 700;
+}
+
+.history .history__item small {
+  margin-top: 2px;
+  color: var(--dashboard-muted);
+}
+
+.history .history__badge {
+  padding: 5px 9px;
+  display: inline-flex;
+  align-items: center;
+  border-radius: 999px;
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.history .history__badge--income {
+  color: var(--dashboard-primary-dark);
+  background: var(--dashboard-primary-soft);
+}
+
+.history .history__badge--expense {
+  color: #495057;
+  background: #eef1f5;
+}
+
+.history .history__amount {
+  color: var(--dashboard-text);
+  font-weight: 700;
+}
+
+.history .history__actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 7px;
+}
+
+.history .history__action {
+  width: 35px;
+  height: 35px;
+  padding: 0;
+  display: inline-grid;
+  place-items: center;
+  border-radius: 9px;
+}
+
+.history .history__action--edit {
+  color: var(--dashboard-primary);
+  border: 1px solid #cfe0ff;
+  background: var(--dashboard-primary-soft);
+}
+
+.history .history__action--edit:hover {
+  color: var(--dashboard-white);
+  border-color: var(--dashboard-primary);
+  background: var(--dashboard-primary);
+}
+
+.history .history__action--delete {
+  color: var(--dashboard-danger);
+  border: 1px solid #f2c7cc;
+  background: var(--dashboard-danger-soft);
+}
+
+.history .history__action--delete:hover {
+  color: var(--dashboard-white);
+  border-color: var(--dashboard-danger);
+  background: var(--dashboard-danger);
+}
+
+@media (max-width: 767.98px) {
+  .history {
+    padding: 16px;
+  }
+
+  .history .history__table-header {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .history .history__export-button {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+@media (max-width: 575.98px) {
+  .history {
+    padding: 12px;
+  }
+
+  .history .history__table-card {
+    border-radius: 14px;
+  }
+
+  .history .history__table-header {
+    padding: 18px;
+  }
+}

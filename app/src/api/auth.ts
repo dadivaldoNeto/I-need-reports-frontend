@@ -1,3 +1,4 @@
+import { callModal } from "../pages/components/modal"
 import { SESSION_ACCESS_TOKEN, isUndefined, LOGIN_ENDPOINT, REGISTER_ENDPOINT, SESSION_USERNAME } from "./requests"
 
 
@@ -66,10 +67,14 @@ export class AUTH {
 		}
 		catch (error: unknown) {
 			if (error instanceof Error) {
+				document.querySelector(".modal-body")!.innerHTML = error.message
 				console.error(error.message);
 			} else {
 				console.error("An unexpected error occurred:", String(error));
+				document.querySelector(".modal-body")!.innerHTML = String(error)
 			}
+			document.querySelector("#ModalLabel")!.innerHTML = "Error"
+			callModal()
 		}
 	}
 

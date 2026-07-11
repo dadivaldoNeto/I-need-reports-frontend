@@ -1,6 +1,7 @@
 import '../css/form.css'
 import type { formData, formType } from '../api/auth';
 import { LOGIN, AUTH } from '../api/auth';
+import { Createmodal } from './components/modal';
 
 export function loginView(typeForm: formType): string {
 
@@ -16,6 +17,7 @@ export function loginView(typeForm: formType): string {
 	}
 
 	return `
+	 ${Createmodal()}
 		<main class="auth">
 		<div id="div_container" >
 			<div class="welcome_msg">

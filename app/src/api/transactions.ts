@@ -1,7 +1,16 @@
 import { callModal } from "../pages/components/modal"
-import { isUndefined, SESSION_ACCESS_TOKEN, TRANSACTION_ENDPOINT } from "./requests"
+import { isUndefined, makeRequest, SESSION_ACCESS_TOKEN, TRANSACTION_ENDPOINT } from "./requests"
 
 export type Operation = 'EXPENSE' | 'INCOME' | undefined
+
+export type AllTransactionResponse = {
+	id: number,
+	type: string,
+	title: string,
+	amount: string,
+	description: string | null | undefined,
+	createdAt: string
+}
 
 export type TransactionRequest = {
 	type: Operation | undefined
@@ -12,6 +21,23 @@ export type TransactionRequest = {
 }
 
 export class TRANSACTION {
+
+	public static async getAllTransactions() {
+		const response: Array<AllTransactionResponse> = await (await makeRequest(TRANSACTION_ENDPOINT, null, 'GET')).json()
+		return response
+	}
+
+	public static async getTransactionsById() {
+
+	}
+
+	public static async UpdateTransactionsById() {
+
+	}
+
+	public static async DeleteTransactionsById() {
+
+	}
 
 	public static async insertTransaction(payload: TransactionRequest, t: any) {
 		try {

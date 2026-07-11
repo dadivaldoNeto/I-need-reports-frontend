@@ -1,6 +1,13 @@
 import { dashboard } from "../pages/dashboardPage";
 import { makeRequest, DASHBOARD_ENDPOINT } from "./requests";
 
+export const currencyFormatter = new Intl.NumberFormat("pt-AO", {
+	style: "currency",
+	currency: "AOA",
+	minimumFractionDigits: 2,
+	maximumFractionDigits: 2,
+});
+
 
 export type dashboardResponse = {
 	amountIncome: string,
@@ -41,16 +48,7 @@ export function ProcessDashboard() {
 	getDashboard()
 }
 
-
-
-const currencyFormatter = new Intl.NumberFormat("pt-AO", {
-	style: "currency",
-	currency: "AOA",
-	minimumFractionDigits: 2,
-	maximumFractionDigits: 2,
-});
-
-function parseMoney(value: string): number {
+export function parseMoney(value: string): number {
 	return Number(
 		value
 			.replace("AOA", "")

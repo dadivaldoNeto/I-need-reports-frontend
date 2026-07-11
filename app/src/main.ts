@@ -6,8 +6,11 @@ import { loginView, processForm } from './pages/authPage';
 import { EXPENSE, INCOME } from './pages/components/navbar';
 import { processTransaction, transaction } from './pages/transaction';
 import { SESSION_ACCESS_TOKEN, SESSION_USERNAME } from './api/requests';
-import { dashboard } from './pages/dashboardPage';
 import { ProcessDashboard } from './api/dashboard';
+import { getHistory } from './pages/history';
+
+
+document.addEventListener('DOMContentLoaded',() => {
 
 const APP = document.querySelector("#app")!;
 
@@ -35,6 +38,8 @@ const routes: Record<string, () => string | void> = {
 	'/register': () => loginView(REGISTER),
 	'/income' : () => transaction(INCOME),
 	'/expense' : () => transaction(EXPENSE),
+	'/history': () => getHistory(),
+	'/logout': () => console.log('logout')
 }
 
 function isLoggedIn() : boolean {
@@ -50,7 +55,11 @@ function isLoggedIn() : boolean {
 const onChangePath = (path: string) => {
 	let content = undefined
 
-	if (isLoggedIn()) {
+	if (!(path in routes)) {
+		content = undefined
+	}
+	else if (isLoggedIn()) {
+
 		if (path == '/login' || path == '/register') {
 			window.location.href = '/'
 			return ;	
@@ -60,8 +69,9 @@ const onChangePath = (path: string) => {
 			window.location.href= '/'
 			return ;
 		}
-		else
+		else {
 			content = routes[path]()
+		}
 	}
 	else if (path == '/login' || path == '/register') {
 		content = routes[path]()
@@ -83,3 +93,5 @@ onChangePath(window.location.pathname)
 
 processTransaction()
 processForm()
+
+})
