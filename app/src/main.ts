@@ -32,31 +32,26 @@ function error(msg: string): string {
 `
 }
 
-const routes: Record<string, () => string | void> = {
-	'/' : () => ProcessDashboard(),
+const routes: Record<string, () => string > = {
+	"/" : () => {ProcessDashboard(); return ''},
+	''  :  () => {ProcessDashboard(); return ''},
 	'/login' : () => loginView(LOGIN),
 	'/register': () => loginView(REGISTER),
 	'/income' : () => transaction(INCOME),
 	'/expense' : () => transaction(EXPENSE),
 	'/history': () => getHistory(),
-	'/logout': () => console.log('logout')
+	'/logout': () => 'Logout'
 }
 
 function isLoggedIn() : boolean {
 	return sessionStorage.getItem(SESSION_ACCESS_TOKEN) != null && sessionStorage.getItem(SESSION_USERNAME) != null
 }
 
-/*
-	SE logado, nao pode acessar login/ e register
-	Se nao logado, so pode acessar login e register
-	Se invalida URL, redir para o erro / login
-*/
-
 const onChangePath = (path: string) => {
-	let content = undefined
+	let content: string
 
 	if (!(path in routes)) {
-		content = undefined
+		content = error("Ops! A página que você está procurando não existe ou foi removida.")
 	}
 	else if (isLoggedIn()) {
 
@@ -69,9 +64,7 @@ const onChangePath = (path: string) => {
 			window.location.href= '/'
 			return ;
 		}
-		else {
-			content = routes[path]()
-		}
+		content = routes[path]()
 	}
 	else if (path == '/login' || path == '/register') {
 		content = routes[path]()
@@ -80,8 +73,6 @@ const onChangePath = (path: string) => {
 		window.location.href = '/login'
 		return ;
 	}
-	if (content == undefined)
-		content = error("Ops! A página que você está procurando não existe ou foi removida.")
 	APP.innerHTML = content
 }
 
