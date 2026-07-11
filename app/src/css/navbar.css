@@ -29,6 +29,7 @@
 	padding-inline: 24px;
 	display: flex;
 	align-items: center;
+	margin: 0 auto;
 }
 
 .app-navbar .app-navbar__brand {
@@ -172,7 +173,7 @@
 		margin: 12px 0 0;
 		padding: 12px;
 		display: grid;
-		grid-template-columns: 1fr auto auto;
+		grid-template-columns: minmax(0, 1fr) auto auto;
 		gap: 10px;
 		border-radius: 8px;
 		background-color: #f7f9fc;
@@ -201,7 +202,18 @@
 		height: 30px;
 	}
 
+	.app-navbar .app-navbar__user {
+		grid-template-columns: 1fr;
+		justify-items: start;
+	}
+
 	.app-navbar .app-navbar__username {
 		font-size: 13px;
+	}
+
+	.app-navbar .app-navbar__icon-link {
+		width: 32px;
+		height: 32px;
+		font-size: 17px;
 	}
 }

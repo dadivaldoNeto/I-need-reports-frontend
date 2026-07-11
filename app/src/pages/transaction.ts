@@ -2,7 +2,7 @@ import { EXPENSE, INCOME, navBar } from "./components/navbar";
 import '../css/transaction.css'
 import type { activeType } from "./components/navbar";
 import { TRANSACTION, type TransactionRequest } from "../api/transactions";
-import { callModal, Createmodal } from "./components/modal";
+import { Createmodal } from "./components/modal";
 
 export function transaction(type: activeType): string {
 
@@ -23,8 +23,8 @@ export function transaction(type: activeType): string {
 		return "Oh! What"
 	return `
 			${navBar(type)}
-<div id="transaction" class="container-fluid">
-  <form id="form_transaction" class="d-flex flex-column">
+<div id="transaction" class="container-fluid py-4">
+  <form id="form_transaction" class="d-flex flex-column mx-auto">
     <div class="mb-3">
       <label for="title" class="form-label">Title</label>
       <input

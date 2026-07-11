@@ -33,7 +33,7 @@ export function loginView(typeForm: formType): string {
 				<input id="input-username" class="form-control custom-input" type="text" autofocus placeholder="Username" minlength=3 maxlength=10 required>
 				<input id="input-password" type="password" class="form-control custom-input" placeholder="Password" required>
 				<input id="type_of_input" value="${typeForm}" type="hidden">
-				<input class="btn btn-primary" type="submit" value="${btn}">
+				<input class="w-100 btn btn-primary py-2" type="submit" value="${btn}">
 			</form>
 		</div>
 		</main>

@@ -10,13 +10,13 @@ export function dashboard(data: dashboardResponse): string {
   tableBodyGen(2)
   return `
 		${navBar(DASHBOARD)}
-	
+
       <main>
-        <div class="dashboard p-3">
+        <div class="dashboard p-3 p-sm-4 p-lg-5">
           <section class="dashboard__cards" aria-label="Resumo financeiro">
             <div class="row g-3 g-sm-4">
 
-              <div class="col-12 col-sm-6 col-md-3">
+              <div class="col-12 col-sm-6 col-lg-3">
                 <article class="dashboard__card">
                   <div class="dashboard__card-header">
                     <span class="dashboard__card-icon">
@@ -33,7 +33,7 @@ export function dashboard(data: dashboardResponse): string {
                 </article>
               </div>
 
-              <div class="col-12 col-sm-6 col-md-3">
+              <div class="col-12 col-sm-6 col-lg-3">
                 <article class="dashboard__card">
                   <div class="dashboard__card-header">
                     <span class="dashboard__card-icon">
@@ -50,7 +50,7 @@ export function dashboard(data: dashboardResponse): string {
                 </article>
               </div>
 
-              <div class="col-12 col-sm-6 col-md-3">
+              <div class="col-12 col-sm-6 col-lg-3">
                 <article class="dashboard__card">
                   <div class="dashboard__card-header">
                     <span class="dashboard__card-icon">
@@ -68,7 +68,7 @@ export function dashboard(data: dashboardResponse): string {
                 </article>
               </div>
 
-              <div class="col-12 col-sm-6 col-md-3">
+              <div class="col-12 col-sm-6 col-lg-3">
                 <article class="dashboard__card">
                   <div class="dashboard__card-header">
                     <span class="dashboard__card-icon">
@@ -88,11 +88,11 @@ export function dashboard(data: dashboardResponse): string {
 
             </div>
           </section>
-          <section>
-          <!-- TABLE section-->
-          ${table(2)}
-          </sectio>
-         </div>
+
+          <section class="dashboard__table-card">
+            ${table(2)}
+          </section>
+        </div>
     </main>
 `
 }
