@@ -1,11 +1,14 @@
 import { DASHBOARD, navBar } from "./components/navbar";
+import 'bootstrap/dist/css/bootstrap.min.css';
+import '../css/table.css';
 import '../css/dashboard.css'
 import type { dashboardResponse } from "../api/dashboard";
 import { tableBodyGen } from "./components/tableBody";
+import { table } from "./components/table";
 
 export function dashboard(data: dashboardResponse): string {
   tableBodyGen(2)
-	return `
+  return `
 		${navBar(DASHBOARD)}
 	
       <main>
@@ -85,9 +88,11 @@ export function dashboard(data: dashboardResponse): string {
 
             </div>
           </section>
-
+          <section>
           <!-- TABLE section-->
-        </div>
+          ${table(2)}
+          </sectio>
+         </div>
     </main>
 `
 }

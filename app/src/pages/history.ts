@@ -1,14 +1,12 @@
-import '../css/history.css'
 import { HISTORY, navBar } from './components/navbar'
-import { tableBodyGen } from './components/tableBody'
+import { table } from './components/table'
 
 export function getHistory() {
-  tableBodyGen()
 	return `
-        ${navBar(HISTORY)}
-<main>
-
-</main>
-	
+    ${navBar(HISTORY)}
+    <section class="dashboard">
+    <!-- TABLE section-->
+      ${table()}
+    </sectio>
 `
 }

@@ -1,0 +1,108 @@
+#table_container {
+	border-radius: 8px;
+	padding-top: 24px;
+	border: 1px solid var(--dashboard-border);
+	background-color: #ffffff;
+}
+
+#main_table {
+	border-radius: 16px;
+	padding: 20px;
+	transition:
+		border-color 180ms ease;
+	font-size: 0.9em;
+}
+
+#main_table thead th,
+#main_table th {
+	padding: 13px 18px;
+	font-size: 13px;
+	font-weight: 700;
+	letter-spacing: 0.035em;
+	text-transform: uppercase;
+	white-space: nowrap;
+	text-align: left;
+}
+
+#main_table td {
+	vertical-align: middle;
+	padding: 4px 18px;
+	font-size: 12px;
+	font-weight: 700;
+	letter-spacing: 0.035em;
+	text-transform: uppercase;
+	white-space: nowrap;
+	text-align: left;
+}
+
+#main_table .table-head {
+	border: 1px solid var(--dashboard-border);
+}
+
+#main_table .op_actions,
+#main_table .op {
+	text-align: center;
+}
+
+.op_icon {
+	width: 35px;
+	height: 35px;
+	padding: 0;
+	display: inline-grid;
+	place-items: center;
+	border-radius: 9px;
+}
+
+#main_table #last_tr {
+	padding: 1px;
+}
+
+#main_table .history__action--edit {
+	color: var(--dashboard-primary);
+	border: 1px solid #cfe0ff;
+	background: var(--dashboard-primary-soft);
+}
+
+#main_table .history__action--edit:hover {
+	border-color: var(--dashboard-primary);
+	background: var(--dashboard-primary);
+}
+
+#main_table .history__action--delete {
+	border: 1px solid #f2c7cc;
+	background: var(--dashboard-danger-soft);
+}
+
+#main_table .history__action--delete:hover {
+	border-color: var(--dashboard-danger);
+	background: var(--dashboard-danger);
+}
+
+#table_container .table-header {
+	padding: 12px;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+
+#table_container .table-title {
+	margin: 0;
+	color: var(--dashboard-text);
+	font-size: 20px;
+	font-weight: 700;
+}
+
+#table_container .table-subtitle {
+	margin: 5px 0 0;
+	color: var(--dashboard-muted);
+	font-size: 13px;
+}
+
+#table_container .export-button {
+	min-height: 16px;
+	padding-inline: 12px;
+	display: inline-flex;
+	align-items: center;
+	gap: 8px;
+	white-space: nowrap;
+}

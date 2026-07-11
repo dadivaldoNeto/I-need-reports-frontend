@@ -80,9 +80,14 @@ window.addEventListener("popstate", () => {
 	onChangePath(window.location.pathname)
 })
 
-onChangePath(window.location.pathname)
+const path = window.location.pathname
+onChangePath(path)
 
-processTransaction()
-processForm()
+
+if (path == '/income' || path == '/expense')
+	processTransaction()
+
+if (path == '/login' || path == '/register')
+	processForm()
 
 })
