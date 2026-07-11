@@ -2,20 +2,17 @@ import { EXPENSE, INCOME, navBar } from "./components/navbar";
 import '../css/transaction.css'
 import type { activeType } from "./components/navbar";
 import { TRANSACTION, type TransactionRequest } from "../api/transactions";
-import { Createmodal } from "./components/modal";
+import { addInputFormat } from "./moneyFormat";
 
 export function transaction(type: activeType): string {
 
-	let name;
 	let placeholder;
 	let textAreaPlaceholder;
 	if (type == INCOME) {
-		name ="INCOME"
 		placeholder = "Google Salary..."
 		textAreaPlaceholder = "Lorem ipsum with some data"
 	}
 	else if (type == EXPENSE) {
-		name ="EXPENSE"
 		placeholder = "Mom's money..."
 		textAreaPlaceholder = "Mom's Gave-me 2k"
 	}
@@ -83,7 +80,6 @@ export function transaction(type: activeType): string {
     <input class="btn btn-primary" type="submit" value="Save" />
   </form>
 </div>
-	${Createmodal('Transaction Added', name)}
 	`
 }
 
@@ -102,142 +98,10 @@ export function processTransaction() {
 			type: tmp == INCOME ? 'INCOME' : tmp == EXPENSE ? 'EXPENSE' : undefined,
 			title: document.querySelector<HTMLInputElement>("#title")?.value,
 			amount: Number(document.querySelector<HTMLInputElement>("#moneyValue")?.value),
-			description: desc == undefined ? null: desc,
+			description: desc == undefined ? null : desc,
 			date: document.querySelector<HTMLInputElement>("#dateInput")?.value
 		}
 		TRANSACTION.insertTransaction(transactioRequest, transaction)
 		console.log(transactioRequest)
 	})
-}
-
-
-function addInputFormat(): void {
-	const moneyInput = document.querySelector<HTMLInputElement>("#money");
-	const moneyValue = document.querySelector<HTMLInputElement>("#moneyValue");
-
-	const formatter = new Intl.NumberFormat("pt-AO", {
-		minimumFractionDigits: 0,
-		maximumFractionDigits: 2,
-	});
-
-	function parseMoney(value: string): {
-		integerPart: string;
-		decimalPart: string;
-		hasDecimalSeparator: boolean;
-	} {
-		const sanitizedValue = value.replace(/[^\d,.]/g, "");
-		const separatorIndex = sanitizedValue.search(/[,.]/);
-
-		if (separatorIndex === -1) {
-			return {
-				integerPart: sanitizedValue.replace(/\D/g, ""),
-				decimalPart: "",
-				hasDecimalSeparator: false,
-			};
-		}
-
-		return {
-			integerPart: sanitizedValue
-				.slice(0, separatorIndex)
-				.replace(/\D/g, ""),
-			decimalPart: sanitizedValue
-				.slice(separatorIndex + 1)
-				.replace(/\D/g, "")
-				.slice(0, 2),
-			hasDecimalSeparator: true,
-		};
-	}
-
-	function formatMoney(value: string): {
-		formattedValue: string;
-		rawValue: string;
-	} {
-		const {
-			integerPart,
-			decimalPart,
-			hasDecimalSeparator,
-		} = parseMoney(value);
-
-		if (!integerPart && !hasDecimalSeparator) {
-			return {
-				formattedValue: "",
-				rawValue: "",
-			};
-		}
-
-		const integerNumber = Number(integerPart || "0");
-		const formattedInteger = formatter.format(integerNumber);
-
-		const formattedValue = hasDecimalSeparator
-			? `${formattedInteger},${decimalPart}`
-			: formattedInteger;
-
-		const rawValue = decimalPart
-			? `${integerNumber}.${decimalPart}`
-			: String(integerNumber);
-
-		return {
-			formattedValue,
-			rawValue,
-		};
-	}
-
-	function countDigits(value: string): number {
-		return value.replace(/\D/g, "").length;
-	}
-
-	function findCursorPosition(
-		value: string,
-		digitsBeforeCursor: number,
-	): number {
-		if (digitsBeforeCursor === 0) {
-			return 0;
-		}
-
-		let digitsFound = 0;
-
-		for (let index = 0; index < value.length; index++) {
-			if (/\d/.test(value[index])) {
-				digitsFound++;
-			}
-
-			if (digitsFound === digitsBeforeCursor) {
-				return index + 1;
-			}
-		}
-
-		return value.length;
-	}
-
-	moneyInput?.addEventListener("input", () => {
-		const cursorPosition = moneyInput.selectionStart ?? moneyInput.value.length;
-
-		const valueBeforeCursor = moneyInput.value.slice(
-			0,
-			cursorPosition,
-		);
-
-		const digitsBeforeCursor = countDigits(valueBeforeCursor);
-
-		const {
-			formattedValue,
-			rawValue,
-		} = formatMoney(moneyInput.value);
-
-		moneyInput.value = formattedValue;
-
-		const newCursorPosition = findCursorPosition(
-			formattedValue,
-			digitsBeforeCursor,
-		);
-
-		moneyInput.setSelectionRange(
-			newCursorPosition,
-			newCursorPosition,
-		);
-
-		if (moneyValue) {
-			moneyValue.value = rawValue;
-		}
-	});
 }

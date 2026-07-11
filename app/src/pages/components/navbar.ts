@@ -1,6 +1,7 @@
 import 'bootstrap-icons/font/bootstrap-icons.css';
 import '../../css/navbar.css'
 import { SESSION_USERNAME } from '../../api/requests';
+import { Createmodal } from './modal';
 
 export type activeType = 0 | 1 | 2 | 3 ;
 
@@ -15,6 +16,7 @@ export function navBar(active: activeType): string {
 	navItems[active] = "active"
 
 	return `
+		 ${Createmodal()}
 <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm app-navbar">
 	<div class="container-fluid app-navbar__container">
 

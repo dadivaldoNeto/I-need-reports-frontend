@@ -1,12 +1,12 @@
-import { currencyFormatter, parseMoney } from "../../api/dashboard"
-import { TRANSACTION, type AllTransactionResponse } from "../../api/transactions"
+import { currencyFormatter, parseMoneyfromAPI } from "../moneyFormat"
+import { TRANSACTION, type TransactionResponse } from "../../api/transactions"
 
-function templateModel(data: AllTransactionResponse): string {
+function templateModel(data: TransactionResponse): string {
   return `
     <tr>
       <th scope="row">${data.title}</th>
       <td>${data.type}</td>
-      <td>${currencyFormatter.format(parseMoney(data.amount))}</td>
+      <td>${currencyFormatter.format(parseMoneyfromAPI(data.amount))}</td>
       <td>${data.createdAt}</td>
       <td class="op_actions">
         <button class="btn op_icon history__action--edit" value="${data.id}"  type="button">
@@ -37,4 +37,22 @@ export async function tableBodyGen(limit: number = -1) {
       tbody.innerHTML += templateModel(response[i])
     }
   }
+
+
+  const deleteButton = document.querySelectorAll('.history__action--delete')
+  deleteButton.forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const id: number = Number(btn.getAttribute('value'))
+      TRANSACTION.DeleteTransactionsById(id, limit)
+    })
+  })
+
+  const editButton = document.querySelectorAll('.history__action--edit')
+  editButton.forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const id: number = Number(btn.getAttribute('value'))
+      sessionStorage.setItem('idT', String(id))
+      window.location.href = '/edit'
+    })
+  })
 }

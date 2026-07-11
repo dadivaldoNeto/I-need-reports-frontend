@@ -1,9 +1,10 @@
 import { callModal } from "../pages/components/modal"
-import { isUndefined, makeRequest, refreshSession, SESSION_ACCESS_TOKEN, TRANSACTION_ENDPOINT } from "./requests"
+import { tableBodyGen } from "../pages/components/tableBody"
+import { isUndefined, makeRequest, refreshSession, SESSION_ACCESS_TOKEN, TRANSACTION_ENDPOINT, wait } from "./requests"
 
 export type Operation = 'EXPENSE' | 'INCOME' | undefined
 
-export type AllTransactionResponse = {
+export type TransactionResponse = {
 	id: number,
 	type: string,
 	title: string,
@@ -20,23 +21,68 @@ export type TransactionRequest = {
 	date: string | undefined
 }
 
+/*
+		catch (error: unknown) {
+			if (error instanceof Error) {
+				console.error(error.message);
+				updateModal_and_call(error.message)
+			} else {
+				console.error("An unexpected error occurred:", String(error));
+				updateModal_and_call(String(error))
+			}
+		}
+
+*/
+
+
 export class TRANSACTION {
 
 	public static async getAllTransactions() {
-		const response: Array<AllTransactionResponse> = await (await makeRequest(TRANSACTION_ENDPOINT, null, 'GET')).json()
+		const response: Array<TransactionResponse> = await (await makeRequest(TRANSACTION_ENDPOINT, null, 'GET')).json()
 		return response
 	}
 
-	public static async getTransactionsById() {
-
+	public static async getTransactionsById(id: number): Promise<TransactionResponse> {
+		const Edit: string = TRANSACTION_ENDPOINT.concat('/', String(id))
+		const response: TransactionResponse = await (await makeRequest(Edit, null, 'GET')).json()
+		return response
 	}
 
-	public static async UpdateTransactionsById() {
-
+	public static async UpdateTransactionsById(data: TransactionRequest, id: number) {
+		const Update: string = TRANSACTION_ENDPOINT.concat('/', String(id))
+		try {
+			await makeRequest(Update, data, 'PUT')
+			updateModal_and_call('Success', 'Transaction Updated')
+			wait(3, () => window.location.href = '/')
+		}
+		catch (error: unknown) {
+			if (error instanceof Error) {
+				console.error(error.message);
+				updateModal_and_call(error.message)
+			} else {
+				console.error("An unexpected error occurred:", String(error));
+				updateModal_and_call(String(error))
+			}
+		}
 	}
 
-	public static async DeleteTransactionsById() {
-
+	public static async DeleteTransactionsById(id: number, limit: number = -1) {
+		const Delete: string = TRANSACTION_ENDPOINT.concat('/', String(id))
+		try {
+			await makeRequest(Delete, null, 'DELETE')
+			updateModal_and_call('Success', 'Delete Transaction')
+			wait(3, () => window.location.href = window.location.pathname)
+		}
+		catch (error: unknown) {
+			if (error instanceof Error) {
+				console.error(error.message);
+				updateModal_and_call(error.message)
+			} else {
+				console.error("An unexpected error occurred:", String(error));
+				updateModal_and_call(String(error))
+			}
+		}
+		tableBodyGen(limit)
 	}
 
 	public static async insertTransaction(payload: TransactionRequest, t: any) {
@@ -45,18 +91,16 @@ export class TRANSACTION {
 				throw new Error("INVALID TYPE OF FORM")
 			await this.addTransaction(payload)
 			callModal()
-			t.reset()
+			wait(2, () => t.reset())
 		}
 		catch (error: unknown) {
 			if (error instanceof Error) {
 				console.error(error.message);
+				updateModal_and_call(error.message)
 			} else {
 				console.error("An unexpected error occurred:", String(error));
+				updateModal_and_call(String(error))
 			}
-			// trash code
-			document.querySelector("#ModalLabel")!.innerHTML = "Error"
-			document.querySelector(".modal-body")!.innerHTML = String(error)
-			callModal()
 		}
 	}
 
@@ -80,4 +124,11 @@ export class TRANSACTION {
 		}
 		console.log("Success Transaction added")
 	}
+}
+
+
+export function updateModal_and_call(msg: string, title: string = 'Error') {
+	document.querySelector("#ModalLabel")!.innerHTML = title
+	document.querySelector(".modal-body")!.innerHTML = msg
+	callModal()
 }

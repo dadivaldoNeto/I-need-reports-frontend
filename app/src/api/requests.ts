@@ -40,14 +40,15 @@ export async function makeRequest(url: string, payload: any, method: string): Pr
 	return response
 }
 
+export function wait(time: number = 2, f: Function) {
+	setTimeout(f(), time * 1000);
+}
 
 export function refreshSession() {
 
-			document.querySelector("#ModalLabel")!.innerHTML = "Error"
-		document.querySelector(".modal-body")!.innerHTML = "Session has expired"
-		callModal()
-		setTimeout(() => {
-			console.log("2 seconds later!");
-		}, 3000);
-		sessionStorage.clear()
+	document.querySelector("#ModalLabel")!.innerHTML = "Error"
+	document.querySelector(".modal-body")!.innerHTML = "Session has expired"
+	callModal()
+	sessionStorage.clear()
+	window.location.href = '/login'
 }

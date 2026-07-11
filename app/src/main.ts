@@ -8,14 +8,14 @@ import { processTransaction, transaction } from './pages/transaction';
 import { SESSION_ACCESS_TOKEN, SESSION_USERNAME } from './api/requests';
 import { ProcessDashboard } from './api/dashboard';
 import { getHistory } from './pages/history';
+import { EditTransaction } from './pages/transaction2';
 
+document.addEventListener('DOMContentLoaded', () => {
 
-document.addEventListener('DOMContentLoaded',() => {
+	const APP = document.querySelector("#app")!;
 
-const APP = document.querySelector("#app")!;
-
-function error(msg: string): string {
-	return `
+	function error(msg: string): string {
+		return `
 	<div class="container d-flex align-items-center justify-content-center min-vh-100">
   		<div class="text-center p-5 shadow-lg rounded-4 bg-light">
     		<h1 class="display-1 fw-bold text-danger">404</h1>
@@ -30,64 +30,72 @@ function error(msg: string): string {
  	</div>
 	</div>
 `
-}
-
-const routes: Record<string, () => string > = {
-	"/" : () => {ProcessDashboard(); return ''},
-	''  :  () => {ProcessDashboard(); return ''},
-	'/login' : () => loginView(LOGIN),
-	'/register': () => loginView(REGISTER),
-	'/income' : () => transaction(INCOME),
-	'/expense' : () => transaction(EXPENSE),
-	'/history': () => getHistory(),
-	'/logout': () => 'Logout'
-}
-
-function isLoggedIn() : boolean {
-	return sessionStorage.getItem(SESSION_ACCESS_TOKEN) != null && sessionStorage.getItem(SESSION_USERNAME) != null
-}
-
-const onChangePath = (path: string) => {
-	let content: string
-
-	if (!(path in routes)) {
-		content = error("Oops! The page you are looking for does not exist or has been removed.")
 	}
-	else if (isLoggedIn()) {
 
-		if (path == '/login' || path == '/register') {
-			window.location.href = '/'
-			return ;	
+	const routes: Record<string, () => string> = {
+		"/": () => { ProcessDashboard(); return '' },
+		'': () => { ProcessDashboard(); return '' },
+		'/login': () => loginView(LOGIN),
+		'/register': () => loginView(REGISTER),
+		'/income': () => transaction(INCOME),
+		'/expense': () => transaction(EXPENSE),
+		'/history': () => getHistory(),
+		'/logout': () => 'Logout',
+		'/edit': () => {
+			if (sessionStorage.getItem('idT') != null)
+				EditTransaction();
+			else {
+				window.location.href = '/'
+			}
+			return ''
 		}
-		else if (path == '/logout') {
-			sessionStorage.clear()
-			window.location.href= '/'
-			return ;
+	}
+
+	function isLoggedIn(): boolean {
+		return sessionStorage.getItem(SESSION_ACCESS_TOKEN) != null && sessionStorage.getItem(SESSION_USERNAME) != null
+	}
+
+	const onChangePath = (path: string) => {
+		let content: string
+
+		if (!(path in routes)) {
+			content = error("Oops! The page you are looking for does not exist or has been removed.")
 		}
-		content = routes[path]()
+		else if (isLoggedIn()) {
+
+			if (path == '/login' || path == '/register') {
+				window.location.href = '/'
+				return;
+			}
+			else if (path == '/logout') {
+				sessionStorage.clear()
+				window.location.href = '/'
+				return;
+			}
+			content = routes[path]()
+		}
+		else if (path == '/login' || path == '/register') {
+			content = routes[path]()
+		}
+		else {
+			window.location.href = '/login'
+			return;
+		}
+		APP.innerHTML = content
 	}
-	else if (path == '/login' || path == '/register') {
-		content = routes[path]()
-	}
-	else {
-		window.location.href = '/login'
-		return ;
-	}
-	APP.innerHTML = content
-}
 
-window.addEventListener("popstate", () => {
-	onChangePath(window.location.pathname)
-})
+	window.addEventListener("popstate", () => {
+		onChangePath(window.location.pathname)
+	})
 
-const path = window.location.pathname
-onChangePath(path)
+	const path = window.location.pathname
+	onChangePath(path)
 
 
-if (path == '/income' || path == '/expense')
-	processTransaction()
+	if (path == '/income' || path == '/expense')
+		processTransaction()
 
-if (path == '/login' || path == '/register')
-	processForm()
+	if (path == '/login' || path == '/register')
+		processForm()
 
 })
