@@ -85,9 +85,8 @@ async function UpdateT(data: TransactionResponse) {
 	</div>
 	`
 
-	processTransaction2()
+	editTransactionLogic()
 	addInputFormat()
-	//addMoney(money)
 }
 
 
@@ -116,7 +115,7 @@ export async function EditTransaction() {
 }
 
 
-export function processTransaction2() {
+export function editTransactionLogic() {
 	const transaction = document.querySelector("#form_transaction2")
 	addInputFormat()
 	if (transaction == null)
