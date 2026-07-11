@@ -33,11 +33,11 @@ export async function getDashboard() {
 		}
 
 		const response = {
-			amountIncome: String(error),
-			nIncomes: 2,
+			amountIncome:'AOA 0',
+			nIncomes: 0,
 			amountExpenses: 'AOA 0',
 			nExpenses: 0,
-			currentBalance: 'AOA 30000000'
+			currentBalance: 'AOA 0'
 		}
 		APP.innerHTML = dashboard(response)
 	}

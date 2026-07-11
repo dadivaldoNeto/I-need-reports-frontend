@@ -4,7 +4,6 @@ import { TRANSACTION, type AllTransactionResponse } from "../../api/transactions
 function templateModel(data: AllTransactionResponse): string {
   return `
     <tr>
-		<input type="hidden" id="transaction_id" value="${data.id}">
       <td>
         <div class="dashboard__description">${data.title}</div>
       </td>
@@ -15,10 +14,10 @@ function templateModel(data: AllTransactionResponse): string {
       <td>${data.createdAt}</td>
       <td>
         <div class="dashboard__actions">
-          <button class="btn dashboard__action dashboard__action--edit" type="button" aria-label="Editar salário">
+          <button class="btn dashboard__action dashboard__action--edit" type="button" value="${data.id}" aria-label="Editar salário">
             <i class="bi bi-pencil-square"></i>
           </button>
-          <button class="btn dashboard__action dashboard__action--delete" type="button" aria-label="Eliminar salário">
+          <button class="btn dashboard__action dashboard__action--delete" type="button" value="${data.id}" aria-label="Eliminar salário">
             <i class="bi bi-trash3"></i>
           </button>
         </div>

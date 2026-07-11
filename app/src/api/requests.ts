@@ -1,3 +1,4 @@
+import { callModal } from "../pages/components/modal"
 
 export const API_URL: string = import.meta.env.VITE_API_URL
 
@@ -25,12 +26,28 @@ export async function makeRequest(url: string, payload: any, method: string): Pr
 			"Accept": "application/json"
 		},
 		method: method,
-		body: payload == null ? null: JSON.stringify(payload)
+		body: payload == null ? null : JSON.stringify(payload)
 	})
+
+	if (response.status == 401) {
+		refreshSession()
+	}
 
 	if (!response.ok) {
 		const message = await response.text().catch(() => 'IDK')
 		throw new Error(message)
 	}
 	return response
+}
+
+
+export function refreshSession() {
+
+			document.querySelector("#ModalLabel")!.innerHTML = "Error"
+		document.querySelector(".modal-body")!.innerHTML = "Session has expired"
+		callModal()
+		setTimeout(() => {
+			console.log("2 seconds later!");
+		}, 3000);
+		sessionStorage.clear()
 }

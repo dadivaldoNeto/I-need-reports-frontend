@@ -1,5 +1,5 @@
 import { callModal } from "../pages/components/modal"
-import { isUndefined, makeRequest, SESSION_ACCESS_TOKEN, TRANSACTION_ENDPOINT } from "./requests"
+import { isUndefined, makeRequest, refreshSession, SESSION_ACCESS_TOKEN, TRANSACTION_ENDPOINT } from "./requests"
 
 export type Operation = 'EXPENSE' | 'INCOME' | undefined
 
@@ -71,6 +71,9 @@ export class TRANSACTION {
 			body: JSON.stringify(payload)
 		})
 
+		if (response.status == 401) {
+			refreshSession()
+		}
 		if (!response.ok) {
 			const message = await response.text().catch(() => 'IDK')
 			throw new Error(message)

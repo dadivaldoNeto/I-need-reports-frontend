@@ -12,7 +12,7 @@ export type LoginResponse = {
 }
 
 export type formData = {
-	user: string,
+	user: string | undefined,
 	password: string | undefined,
 	type: number | undefined
 }
@@ -41,7 +41,7 @@ export class AUTH {
 		let authRequest = this.createAuthRequest(data)
 		let response: LoginResponse = await this.authAPI(authRequest, REGISTER_ENDPOINT)
 		sessionStorage.setItem(SESSION_ACCESS_TOKEN, response.token)
-		sessionStorage.setItem(SESSION_USERNAME, data.user)
+		sessionStorage.setItem(SESSION_USERNAME, data.user!)
 		console.log('Sucess')
 		window.location.href = '/'
 	}
@@ -50,7 +50,7 @@ export class AUTH {
 		let authRequest = this.createAuthRequest(data)
 		let response: LoginResponse = await this.authAPI(authRequest, LOGIN_ENDPOINT)
 		sessionStorage.setItem(SESSION_ACCESS_TOKEN, response.token)
-		sessionStorage.setItem(SESSION_USERNAME, data.user)
+		sessionStorage.setItem(SESSION_USERNAME, data.user!)
 		console.log(response.token)
 		console.log('Sucess Saved')
 		window.location.href = '/'
