@@ -19,13 +19,13 @@ function error(msg: string): string {
 	<div class="container d-flex align-items-center justify-content-center min-vh-100">
   		<div class="text-center p-5 shadow-lg rounded-4 bg-light">
     		<h1 class="display-1 fw-bold text-danger">404</h1>
-    		<h2 class="fw-semibold mb-3">Página não encontrada</h2>
+    		<h2 class="fw-semibold mb-3">Page not found</h2>
     		<p class="text-muted mb-4">
-    		  ${msg}
+    	  ${msg}
     		</p>
 
     		<a href="/" class="btn btn-primary px-4 py-2 rounded-pill">
-      			Voltar para a página inicial
+      			Back to home
     		</a>
  	</div>
 	</div>
@@ -51,7 +51,7 @@ const onChangePath = (path: string) => {
 	let content: string
 
 	if (!(path in routes)) {
-		content = error("Ops! A página que você está procurando não existe ou foi removida.")
+		content = error("Oops! The page you are looking for does not exist or has been removed.")
 	}
 	else if (isLoggedIn()) {
 

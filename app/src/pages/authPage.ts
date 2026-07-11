@@ -8,12 +8,12 @@ export function loginView(typeForm: formType): string {
 	let loginClassCSS: string = 'link_deactive'
 	let registerClassCSS: string = 'link_active'
 	let title: string = 'Welcome aboard!'
-	let btn: string = 'Registar'
+	let btn: string = 'Register'
 	if (typeForm === LOGIN) {
 		loginClassCSS = "link_active"
 		registerClassCSS = "link_deactive"
 		title = "Welcome back!"
-		btn = "Entrar"
+		btn = "Log in"
 	}
 
 	return `
@@ -23,9 +23,9 @@ export function loginView(typeForm: formType): string {
 			<div class="welcome_msg">
 				<h1 class="h3">${title}</h1>
 				<div >
-					<a class="${loginClassCSS}" href="/login">Old User</a>
+					<a class="${loginClassCSS}" href="/login">Existing user</a>
 					<span>/</span>
-					<a class="${registerClassCSS}" href="/register">New User</a>
+					<a class="${registerClassCSS}" href="/register">New user</a>
 				</div>
 			</div>
 

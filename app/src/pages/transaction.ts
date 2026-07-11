@@ -38,7 +38,7 @@ export function transaction(type: activeType): string {
 
     <div id="money_and_date" class="mb-3">
       <div id="amount">
-        <label for="money" class="form-label">Montante</label>
+        <label for="money" class="form-label">Amount</label>
 
         <div class="money-control">
           <span class="money-prefix">AOA</span>
@@ -69,7 +69,7 @@ export function transaction(type: activeType): string {
     </div>
 
     <div class="mb-4">
-      <label for="desc" class="form-label">Description (opcional)</label>
+      <label for="desc" class="form-label">Description (optional)</label>
       <textarea
         id="desc"
         class="form-control p-3"
@@ -80,7 +80,7 @@ export function transaction(type: activeType): string {
 
     <input id="type_of_input" value="${type}" type="hidden" />
 
-    <input class="btn btn-primary" type="submit" value="Salvar" />
+    <input class="btn btn-primary" type="submit" value="Save" />
   </form>
 </div>
 	${Createmodal('Transaction Added', name)}

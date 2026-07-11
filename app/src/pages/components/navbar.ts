@@ -38,7 +38,7 @@ export function navBar(active: activeType): string {
 			data-bs-target="#navbarMenu"
 			aria-controls="navbarMenu"
 			aria-expanded="false"
-			aria-label="Abrir menu"
+			aria-label="Open menu"
 		>
 			<span class="navbar-toggler-icon"></span>
 		</button>
@@ -79,13 +79,13 @@ export function navBar(active: activeType): string {
 
 			<div class="app-navbar__user">
 				<span class="navbar-text app-navbar__username">
-					Olá, ${sessionStorage.getItem(SESSION_USERNAME) ?? "Utilizador"}
+					Hello, ${sessionStorage.getItem(SESSION_USERNAME) ?? "User"}
 				</span>
 
 				<a
 					href="/settings"
 					class="app-navbar__icon-link"
-					aria-label="Definições"
+					aria-label="Settings"
 				>
 					<i class="bi bi-gear"></i>
 				</a>
@@ -93,7 +93,7 @@ export function navBar(active: activeType): string {
 				<a
 					href="/logout"
 					class="app-navbar__icon-link app-navbar__icon-link--logout"
-					aria-label="Terminar sessão"
+					aria-label="Log out"
 				>
 					<i class="bi bi-box-arrow-right"></i>
 				</a>
