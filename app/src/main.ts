@@ -8,7 +8,7 @@ import { processTransaction, transaction } from './pages/transaction';
 import { SESSION_ACCESS_TOKEN, SESSION_USERNAME } from './api/requests';
 import { ProcessDashboard } from './api/dashboard';
 import { getHistory } from './pages/history';
-import { EditTransaction } from './pages/editTransactionLogic';
+import { EditTransaction } from './pages/editTransaction';
 
 document.addEventListener('DOMContentLoaded', () => {
 

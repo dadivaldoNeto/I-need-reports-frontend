@@ -6,6 +6,7 @@ export const TRANSACTION_ENDPOINT = `${API_URL}/transactions`
 export const LOGIN_ENDPOINT = `${API_URL}/login`
 export const REGISTER_ENDPOINT = `${API_URL}/register`
 export const DASHBOARD_ENDPOINT = `${API_URL}/dashboard`
+export const REPORTS_ENDPOINT = `${API_URL}/reports/pdf`
 
 export const SESSION_ACCESS_TOKEN = "authToken"
 export const SESSION_USERNAME = "user"
@@ -49,6 +50,9 @@ export function refreshSession() {
 	document.querySelector("#ModalLabel")!.innerHTML = "Error"
 	document.querySelector(".modal-body")!.innerHTML = "Session has expired"
 	callModal()
-	sessionStorage.clear()
-	window.location.href = '/login'
+
+	wait(5, () => {
+		sessionStorage.clear()
+		window.location.href = '/login'
+	})
 }

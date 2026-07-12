@@ -1,6 +1,7 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../../css/table.css'
 import { tableBodyGen } from './tableBody';
+import { getReports } from '../../api/reports';
 
 export function table(limit: number = -1) {
   return `
@@ -12,7 +13,7 @@ export function table(limit: number = -1) {
         Latest financial records.
       </p>
     </div>
-    <button class="btn btn-primary export-button" type="button">
+    <button id="downlaod_btn" class="btn btn-primary export-button" type="button">
       <i class="bi bi-file-earmark-pdf"></i>
       <span>Export PDF</span>
     </button>
@@ -45,4 +46,29 @@ export function table(limit: number = -1) {
 	`
 }
 
-function callTableBody(limit: number){tableBodyGen(limit); return ''}
+let isDownloading = false
+
+export function exportPDFbtn() {
+  const btn: HTMLButtonElement | null = document.querySelector("#downlaod_btn")
+
+  if (!btn) {
+    console.error("Botão de download não encontrado");
+    return;
+  }
+  btn.onclick = async () => {
+    if (isDownloading) return;
+
+    isDownloading = true;
+    btn.disabled = true;
+
+    try {
+      await getReports();
+    } finally {
+      isDownloading = false;
+      btn.disabled = false;
+    }
+  };
+}
+
+
+function callTableBody(limit: number) { tableBodyGen(limit); return '' }

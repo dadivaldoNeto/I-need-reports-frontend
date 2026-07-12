@@ -114,7 +114,6 @@ export async function EditTransaction() {
 	}
 }
 
-
 export function editTransactionLogic() {
 	const transaction = document.querySelector("#form_transaction2")
 	addInputFormat()

@@ -1,5 +1,6 @@
 import { currencyFormatter, parseMoneyfromAPI } from "../moneyFormat"
 import { TRANSACTION, type TransactionResponse } from "../../api/transactions"
+import { exportPDFbtn } from "./table"
 
 function templateModel(data: TransactionResponse): string {
   return `
@@ -22,7 +23,9 @@ function templateModel(data: TransactionResponse): string {
 }
 
 export async function tableBodyGen(limit: number = -1) {
+
   const response = await TRANSACTION.getAllTransactions()
+  exportPDFbtn()
   console.log(response)
   const tbody = document.querySelector("#table_overview")
   if (tbody == null)

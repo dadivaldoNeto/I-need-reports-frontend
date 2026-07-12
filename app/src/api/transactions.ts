@@ -44,7 +44,9 @@ export class TRANSACTION {
 
 	public static async getTransactionsById(id: number): Promise<TransactionResponse> {
 		const Edit: string = TRANSACTION_ENDPOINT.concat('/', String(id))
+
 		const response: TransactionResponse = await (await makeRequest(Edit, null, 'GET')).json()
+			.catch(() => console.error('Cant get JSON'))
 		return response
 	}
 
