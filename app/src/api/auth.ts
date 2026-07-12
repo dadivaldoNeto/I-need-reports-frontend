@@ -1,5 +1,5 @@
 import { callModal } from "../pages/components/modal"
-import { SESSION_ACCESS_TOKEN, isUndefined, LOGIN_ENDPOINT, REGISTER_ENDPOINT, SESSION_USERNAME } from "./requests"
+import { SESSION_ACCESS_TOKEN, isUndefined, LOGIN_ENDPOINT, REGISTER_ENDPOINT, SESSION_USERNAME, ThrowError } from "./requests"
 
 
 export type AuthRequest = {
@@ -89,8 +89,7 @@ export class AUTH {
 		})
 
 		if (!response.ok) {
-			const message = await response.text().catch(() => '')
-			throw new Error(message)
+			await ThrowError(response)
 		}
 		return await response.json() as LoginResponse
 	}

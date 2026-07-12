@@ -35,8 +35,7 @@ export async function makeRequest(url: string, payload: any, method: string): Pr
 	}
 
 	if (!response.ok) {
-		const message = await response.text().catch(() => 'IDK')
-		throw new Error(message)
+		await ThrowError(response)
 	}
 	return response
 }
@@ -55,4 +54,13 @@ export function refreshSession() {
 		sessionStorage.clear()
 		window.location.href = '/login'
 	})
+}
+
+
+export async function ThrowError(response: any) {
+	const message = await response.json().catch(() => 'Auth Error')
+	let errorMsg: string = ''
+	for (const t of Object.values(message))
+		errorMsg += t + '\n'
+	throw new Error(errorMsg)
 }

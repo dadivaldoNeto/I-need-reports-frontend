@@ -26,7 +26,7 @@ export async function getDashboard() {
 		}
 
 		const response = {
-			amountIncome:'AOA 0',
+			amountIncome: 'AOA 0',
 			nIncomes: 0,
 			amountExpenses: 'AOA 0',
 			nExpenses: 0,

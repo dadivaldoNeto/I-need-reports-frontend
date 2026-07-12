@@ -16,8 +16,7 @@ export async function getReports() {
 		await refreshSession()
 
 	if (!response.ok) {
-		const message = await response.text().catch(() => 'FILE ERROR')
-		updateModal_and_call(message, 'Export pdf')
+		updateModal_and_call('File Error, while Download', 'Export pdf')
 		return
 	}
 

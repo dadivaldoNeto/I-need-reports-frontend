@@ -1,6 +1,6 @@
 import { callModal } from "../pages/components/modal"
 import { tableBodyGen } from "../pages/components/tableBody"
-import { isUndefined, makeRequest, refreshSession, SESSION_ACCESS_TOKEN, TRANSACTION_ENDPOINT, wait } from "./requests"
+import { isUndefined, makeRequest, refreshSession, SESSION_ACCESS_TOKEN, ThrowError, TRANSACTION_ENDPOINT, wait } from "./requests"
 
 export type Operation = 'EXPENSE' | 'INCOME' | undefined
 
@@ -121,8 +121,7 @@ export class TRANSACTION {
 			refreshSession()
 		}
 		if (!response.ok) {
-			const message = await response.text().catch(() => 'IDK')
-			throw new Error(message)
+			await ThrowError(response)
 		}
 		console.log("Success Transaction added")
 	}
